@@ -1,0 +1,81 @@
+#include "saltlamp_AI.h"
+
+void saltlamp_AI::send_status(byte pin)
+{
+	if (!devices[pin].active) {
+		devices[pin].value = analogRead(pin);
+	}
+
+	Serial.print("AI ");
+	Serial.print(pin);
+	Serial.print(" ");
+	Serial.println(devices[pin].value);
+}
+
+void saltlamp_AI::loop()
+{
+	int j;
+
+	for (byte i=0; i<PINS; i++) {
+		if (devices[i].active) {
+			j = analogRead(i);
+			if (j != devices[i].value) {
+				devices[i].value = j;
+				send_status(i);
+			}
+		}
+	}
+}
+
+void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
+{
+	if (ser_command == "REG") {
+
+		if (!DEVS.in_use(ser_pin)) {
+			DEVS.reg(ser_pin, mAI);
+
+			ser_pin = ser_pin - 60;
+			devices[ser_pin].value = analogRead(ser_pin);
+
+			devices[ser_pin].active = false;
+			if (ser_value == "E") {
+				devices[ser_pin].active = true;
+			}
+
+			response_msg = MSG_OK;
+		} else {
+			response_msg = MSG_PIN_IN_USE;
+		}
+
+	} else if (ser_command == "ENABLE") {
+
+		if (DEVS.is_device(ser_pin, mAI)) {
+			devices[ser_pin - 60].active = true;
+
+			response_msg = MSG_OK;
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+
+	} else if (ser_command == "DISABLE") {
+
+		if (DEVS.is_device(ser_pin, mAI)) {
+			devices[ser_pin - 60].active = false;
+
+			response_msg = MSG_OK;
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+
+	} else if (ser_command == "READ") {
+
+		if (DEVS.is_device(ser_pin, mAI)) {
+			send_status(ser_pin - 60);
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+	} else {
+		response_msg = MSG_CMD_NOT_RECO;
+	}
+
+}
