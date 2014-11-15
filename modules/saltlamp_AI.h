@@ -4,9 +4,10 @@ class saltlamp_AI : public saltlamp_module {
 	private:
 		struct device {
 			int value;
+			int diffThreshold;
 			bool active;
 
-			device() : value(0), active(false) {}
+			device() : value(0), diffThreshold(1), active(false) {}
 		};
 
 		static const byte PINS = BOARD_A_MAX + 1;

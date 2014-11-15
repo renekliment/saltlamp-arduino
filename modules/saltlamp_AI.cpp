@@ -15,11 +15,14 @@ void saltlamp_AI::send_status(byte pin)
 void saltlamp_AI::loop()
 {
 	int j;
+	int diff;
 
 	for (byte i=0; i<PINS; i++) {
 		if (devices[i].active) {
 			j = analogRead(i);
-			if (j != devices[i].value) {
+			diff = j - devices[i].value;
+			
+			if ( abs(diff) >= devices[i].diffThreshold ) {
 				devices[i].value = j;
 				send_status(i);
 			}
@@ -47,6 +50,16 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 
+	} else if (ser_command == "SET_DIFFTHRSHLD") {
+
+		if (DEVS.is_device(ser_pin, mAI)) {
+			devices[ser_pin - 60].diffThreshold = ser_value.toInt();
+			
+			response_msg = MSG_OK;
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+		
 	} else if (ser_command == "ENABLE") {
 
 		if (DEVS.is_device(ser_pin, mAI)) {

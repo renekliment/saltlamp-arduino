@@ -153,6 +153,14 @@ AI_REG #N
 // enables sending messages on device state change
 AI_REG #N E
 
+// sets a threshold for disinguishing AI values
+// this is set to 1 by default, meaning any change in reading is considered a change
+// when you set this to K, then only reading with difference K or more is considered a change
+//
+// VALUE is a number between 1 and like 1023
+// for sensors like photoresistors, 10 or 15 seems like a value you would probably use
+AU_SET_DIFFTHRSHLD #N VALUE
+
 // enables sending messages on device state change (on-the-fly setting)
 AI_ENABLE #N
 
