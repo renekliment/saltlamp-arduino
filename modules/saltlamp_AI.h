@@ -9,7 +9,7 @@ class saltlamp_AI : public saltlamp_module {
 			device() : value(0), active(false) {}
 		};
 
-		static const byte PINS = BOARD_A_MAX + 60 + 1;
+		static const byte PINS = BOARD_A_MAX + 1;
 		device devices[PINS];
 
 		void send_status(byte pin);

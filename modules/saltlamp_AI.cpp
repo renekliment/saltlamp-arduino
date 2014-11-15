@@ -7,7 +7,7 @@ void saltlamp_AI::send_status(byte pin)
 	}
 
 	Serial.print("AI ");
-	Serial.print(pin);
+	Serial.print(pin + 60);
 	Serial.print(" ");
 	Serial.println(devices[pin].value);
 }
