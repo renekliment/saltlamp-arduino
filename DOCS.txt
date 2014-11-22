@@ -175,10 +175,20 @@ AI_READ #N
 <- AI #N VALUE
 ###############################################################
 
+OW (1-Wire)
+===============================================================
+// registers 1-Wire bus
+OW_REG #N
+###############################################################
+
 TEMP (temperature and humidity readings)
 ===============================================================
 // registers a DHT11 device
 TEMP_REG_DHT11 #N
+
+// registers a "Dallas device", ex. DS18B20
+// ADDRESS is 16 characters representing 1-Wire address
+TEMP_REG_DALLAS #N ADDRESS
 
 // registers a wireless sensor communicating on 433MHz over the Auriol protocol
 TEMP_REG_AURIOL433 #N
@@ -188,8 +198,8 @@ TEMP_READ #N
 
 // message with a reading
 // VALUE1 is usually a float meaning temperature
-// VALUE2 is usually a float meaning humidity
-<- TEMP_READ #N VALUE1 VALUE2
+// VALUE2 is usually a float meaning humidity or it can be sensor ID
+<- TEMP #N VALUE1 VALUE2
 ###############################################################
 
 IR (infrared signals)
