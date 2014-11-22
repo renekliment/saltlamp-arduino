@@ -5,6 +5,7 @@ enum {
 	mDI = 1,
 	mDO,
 	mAI,
+	mOW,
 	mTEMP,
 	mIR,
 	mUS,
@@ -20,6 +21,8 @@ enum {
 #include "external/dht.cpp"
 #include "external/auriol433.cpp"
 #include "external/IRremote/IRremote.cpp"
+
+#include "modules/saltlamp_OW.cpp"
 
 #include "modules/saltlamp_SYS.cpp"
 #include "modules/saltlamp_AI.cpp"

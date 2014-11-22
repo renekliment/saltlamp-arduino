@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include <OneWire.h>
 
 #include "saltlamp_inc_boards.h"
 #include "saltlamp_inc_messages.h"
@@ -19,15 +20,16 @@ void setup()
 {
 	Serial.begin(19200);
 
-	ser_string.reserve(35);
+	ser_string.reserve(42);
 	ser_module.reserve(5);
 	ser_command.reserve(15);
-	ser_value.reserve(5);
+	ser_value.reserve(17);
 
 	DEVS.reg(0, mSYS); 	// PINs 0 and 1 are reserved for serial communication
 	DEVS.reg(1, mSYS);
 }
 
+saltlamp_OW OW(Serial, response_msg, DEVS);
 saltlamp_SYS SYS(Serial, response_msg, DEVS);
 saltlamp_AI AI(Serial, response_msg, DEVS);
 saltlamp_DI DI(Serial, response_msg, DEVS);
@@ -66,6 +68,8 @@ void loop()
 			DI.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "DO") {
 			DO.parse(ser_command, ser_pin, ser_value);
+		} else if (ser_module == "OW") {
+			OW.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "TEMP") {
 			TEMP.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "US") {
