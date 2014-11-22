@@ -20,7 +20,7 @@ void saltlamp_TEMP::loop()
 				
 				if (ret.ok) {
 				
-					Serial.print("TEMP_READ ");
+					Serial.print("TEMP ");
 					Serial.print(i);
 					Serial.print(" ");
 					Serial.print(ret.temperature, 1);
@@ -35,7 +35,7 @@ void saltlamp_TEMP::loop()
 }
 
 void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
-{
+{	
 	if (ser_command == "REG_DHT11") {
 
 		if (!DEVS.in_use(ser_pin)) {
@@ -49,7 +49,31 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 		} else {
 			response_msg = MSG_PIN_IN_USE;
 		}
+		
+	} else if (ser_command == "REG_DALLAS") {
 
+		if (DEVS.is_device(ser_pin, mOW)) {
+
+			devices[ser_pin].driver = TEMP_DALLAS;
+			devices[ser_pin].last_read = 0;
+			devices[ser_pin].security_interval = 1000;
+
+			dallas = new DallasTemperature(saltlamp_OW::ow);			
+			dallas->begin();
+			
+			char ad[3];
+			for (byte i=0; i < 8; i++) {
+				ser_value.substring(2*i, 2*i + 2).toCharArray(ad, 3);
+				devices[ser_pin].owaddr[i] = (byte)strtol(ad, NULL, 16);
+			}
+						
+			dallas->setResolution(devices[ser_pin].owaddr, 12);
+ 
+			response_msg = MSG_OK;
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+		
 	} else if (ser_command == "REG_AURIOL433") {
 
 		if (!DEVS.in_use(ser_pin)) {
@@ -67,7 +91,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 				devices[ser_pin].security_interval = 1000;
 
 				response_msg = MSG_OK;
-			}
+			} 
 		} else {
 			response_msg = MSG_PIN_IN_USE;
 		}
@@ -75,14 +99,16 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 		
 	} else if (ser_command == "READ") {
 
-		if (DEVS.is_device(ser_pin, mTEMP)) {
+		if (DEVS.is_device(ser_pin, mTEMP) 
+			|| ( DEVS.is_device(ser_pin, mOW) && devices[ser_pin].driver == TEMP_DALLAS ) 
+		) {
 
 			currentMillis = millis();
 			if (currentMillis - devices[ser_pin].last_read < devices[ser_pin].security_interval) {
 				response_msg = MSG_SECURITY_INTERVAL;
 			} else {
 
-				Serial.print("TEMP_READ ");
+				Serial.print("TEMP ");
 				Serial.print(ser_pin);
 				
 				devices[ser_pin].last_read = currentMillis;
@@ -115,6 +141,20 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 						break;
 					}
+					
+					case TEMP_DALLAS:
+					
+						dallas->requestTemperatures();
+						Serial.print(" ");
+						Serial.print(dallas->getTempC(devices[ser_pin].owaddr));
+						Serial.print(" ");
+						for (uint8_t i = 0; i < 8; i++) {
+							// zero pad the address if necessary
+							if (devices[ser_pin].owaddr[i] < 16) Serial.print("0");
+							Serial.print(devices[ser_pin].owaddr[i], HEX);
+						}
+						Serial.println();
+						break;
 					
 					case TEMP_AURIOL433: 
 

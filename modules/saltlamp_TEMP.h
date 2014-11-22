@@ -1,4 +1,5 @@
 #include "saltlamp_module.h"
+#include "external/Arduino-Temperature-Control-Library/DallasTemperature.cpp"
 
 class saltlamp_TEMP : public saltlamp_module {
 	private:
@@ -6,6 +7,7 @@ class saltlamp_TEMP : public saltlamp_module {
 			byte driver;
 			unsigned long last_read;
 			unsigned int security_interval;
+			DeviceAddress owaddr;
 
 			device() : driver(0), last_read(0), security_interval(0) {}
 		};
@@ -18,10 +20,12 @@ class saltlamp_TEMP : public saltlamp_module {
 		enum {
 			TEMP_DHT11 = 1,
 			TEMP_AURIOL433,
+			TEMP_DALLAS
 		} drivers;
 
 		dht DHT;
 		auriol433 AURIOL433;
+		DallasTemperature *dallas;
 		
 	public:
 		void auriol433check();
