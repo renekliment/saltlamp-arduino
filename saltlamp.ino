@@ -37,7 +37,7 @@ saltlamp_DO DO(Serial, response_msg, DEVS);
 saltlamp_TEMP TEMP(Serial, response_msg, DEVS);
 void saltlamp_TEMP_interrupt1() { TEMP.auriol433check(); }
 
-saltlamp_IR IR(Serial, response_msg, DEVS);
+// saltlamp_IR IR(Serial, response_msg, DEVS);
 
 saltlamp_US US(Serial, response_msg, DEVS);
 void saltlamp_US_interrupt1() { US.measure(); }
@@ -48,7 +48,7 @@ void loop()
 	AI.loop();
 	US.loop();
 	TEMP.loop();
-	IR.loop();
+// 	IR.loop();
 
 	if (ser_string_complete) {
 		ser_module = ser_string.substring(0, ser_string.indexOf('_'));
@@ -76,8 +76,8 @@ void loop()
 			US.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "SYS") {
 			SYS.parse(ser_command, ser_pin, ser_value);
-		} else if (ser_module == "IR") {
-			IR.parse(ser_command, ser_pin, ser_value);
+// 		} else if (ser_module == "IR") {
+// 			IR.parse(ser_command, ser_pin, ser_value);
 		} else {
 			response_msg = MSG_MODULE_NA;
 		}
