@@ -9,7 +9,8 @@ enum {
 	mTEMP,
 	mIR,
 	mUS,
-	mSYS
+	mSYS,
+	m433
 } modules;
 
 /* Arduino IDE / compiler / linker / ... is just so efing stupid in so many ways ...
@@ -21,6 +22,7 @@ enum {
 #include "external/dht.cpp"
 #include "external/auriol433.cpp"
 #include "external/IRremote/IRremote.cpp"
+#include "external/rc-switch/RCSwitch.cpp"
 
 #include "modules/saltlamp_OW.cpp"
 
@@ -30,6 +32,7 @@ enum {
 #include "modules/saltlamp_DO.cpp"
 #include "modules/saltlamp_TEMP.cpp"
 #include "modules/saltlamp_IR.cpp"
+#include "modules/saltlamp_433.cpp"
 #include "modules/saltlamp_US.cpp"
 
 #endif

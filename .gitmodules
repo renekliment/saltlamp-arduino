@@ -1,0 +1,4 @@
+[submodule "external/rc-switch"]
+	path = external/rc-switch
+	url = https://github.com/renekliment/rc-switch.git
+	branch = lidl-sockets-basic
