@@ -32,7 +32,19 @@ void saltlamp_433::parse(String &ser_command, byte &ser_pin, String &ser_value)
 		} else {
 			response_msg = MSG_NOT_DEVICE;
 		}
-				
+			
+	} else if (ser_command == "PROTO") {
+
+		if (DEVS.is_device(ser_pin, m433)) {
+
+			devices[ser_pin].radio.setProtocol(ser_value.toInt());
+	
+			response_msg = MSG_OK;
+							
+		} else {
+			response_msg = MSG_NOT_DEVICE;
+		}
+			
 	} else {
 		response_msg = MSG_CMD_NOT_RECO;
 	}
