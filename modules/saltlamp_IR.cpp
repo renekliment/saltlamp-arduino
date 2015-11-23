@@ -43,7 +43,7 @@ void saltlamp_IR::loop()
 
 void saltlamp_IR::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			if (!device_set) {

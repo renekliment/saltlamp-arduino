@@ -32,7 +32,7 @@ void saltlamp_AI::loop()
 
 void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, mAI);
@@ -50,7 +50,7 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 
-	} else if (ser_command == "SET_DIFFTHRSHLD") {
+	} else if (ser_command == F("SET_DIFFTHRSHLD")) {
 
 		if (DEVS.is_device(ser_pin, mAI)) {
 			devices[ser_pin - 60].diffThreshold = ser_value.toInt();
@@ -60,7 +60,7 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 		
-	} else if (ser_command == "ENABLE") {
+	} else if (ser_command == F("ENABLE")) {
 
 		if (DEVS.is_device(ser_pin, mAI)) {
 			devices[ser_pin - 60].active = true;
@@ -70,7 +70,7 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 
-	} else if (ser_command == "DISABLE") {
+	} else if (ser_command == F("DISABLE")) {
 
 		if (DEVS.is_device(ser_pin, mAI)) {
 			devices[ser_pin - 60].active = false;
@@ -80,7 +80,7 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 
-	} else if (ser_command == "READ") {
+	} else if (ser_command == F("READ")) {
 
 		if (DEVS.is_device(ser_pin, mAI)) {
 			send_status(ser_pin - 60);

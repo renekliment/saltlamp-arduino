@@ -2,7 +2,7 @@
 
 void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, mDO);
@@ -27,7 +27,7 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 
-	} else if (ser_command == "WRITE") {
+	} else if (ser_command == F("WRITE")) {
 
 		if (DEVS.is_device(ser_pin, mDO)) {
 			
@@ -65,7 +65,7 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 
-	} else if (ser_command == "GETSTATE") {
+	} else if (ser_command == F("GETSTATE")) {
 
 		if (DEVS.is_device(ser_pin, mDO)) {
 			
@@ -78,7 +78,7 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 		
-	} else if (ser_command == "SETSECINTERVAL") {
+	} else if (ser_command == F("SETSECINTERVAL")) {
 
 		if (DEVS.is_device(ser_pin, mDO)) {
 

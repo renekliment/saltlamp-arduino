@@ -26,7 +26,7 @@ void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_mo
 				Serial.println(ser_string);
 				break;
 			case MSG_PIN_IN_USE:
-				Serial.println("ERROR PIN_IN_USE");
+				Serial.println(F("ERROR PIN_IN_USE"));
 				break;
 			case MSG_ONE_PER_MODULE:
 				Serial.println(F("ERROR ONE_PER_MODULE"));

@@ -2,16 +2,16 @@
 
 void saltlamp_SYS::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "PING") {
+	if (ser_command == F("PING")) {
 
 		if (ser_pin >= 80 && ser_pin <= 89) {
-			Serial.print("SYS_PONG ");
+			Serial.print(F("SYS_PONG "));
 			Serial.println(ser_pin);
 		} else {
 			response_msg = MSG_SYNTAX_ERROR;
 		}
 
-	} else if (ser_command == "DIAG") {
+	} else if (ser_command == F("DIAG")) {
 
 		if (ser_pin == 99) {
 			//diag();
@@ -19,7 +19,7 @@ void saltlamp_SYS::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_SYNTAX_ERROR;
 		}
 
-	} else if (ser_command == "MEM") {
+	} else if (ser_command == F("MEM")) {
 
 		if (ser_pin == 99) {
 			Serial.print("SYS_MEM ");
@@ -28,11 +28,11 @@ void saltlamp_SYS::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_SYNTAX_ERROR;
 		}
 
-	} else if (ser_command == "CONFIG") {
+	} else if (ser_command == F("CONFIG")) {
 
 		if (ser_pin == 99) {
 			if (ser_value == "") {
-				Serial.print("SYS_CONFIG ");
+				Serial.print(F("SYS_CONFIG "));
 				Serial.println(SYS_configured);
 			} else if (ser_value == "1") {
 				SYS_configured = true;

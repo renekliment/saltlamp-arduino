@@ -20,7 +20,7 @@ void saltlamp_TEMP::loop()
 				
 				if (ret.ok) {
 				
-					Serial.print("TEMP ");
+					Serial.print(F("TEMP "));
 					Serial.print(i);
 					Serial.print(" ");
 					Serial.print(ret.temperature, 1);
@@ -36,7 +36,7 @@ void saltlamp_TEMP::loop()
 
 void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {	
-	if (ser_command == "REG_DHT11") {
+	if (ser_command == F("REG_DHT11")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, mTEMP);
@@ -50,7 +50,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 		
-	} else if (ser_command == "REG_DALLAS") {
+	} else if (ser_command == F("REG_DALLAS")) {
 
 		if (DEVS.is_device(ser_pin, mOW)) {
 
@@ -74,7 +74,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 		
-	} else if (ser_command == "REG_AURIOL433") {
+	} else if (ser_command == F("REG_AURIOL433")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			if (!DEVS.is_interrupt(ser_pin)) {
@@ -97,7 +97,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 		}
 
 		
-	} else if (ser_command == "READ") {
+	} else if (ser_command == F("READ")) {
 
 		if (DEVS.is_device(ser_pin, mTEMP) 
 			|| ( DEVS.is_device(ser_pin, mOW) && devices[ser_pin].driver == TEMP_DALLAS ) 
@@ -127,15 +127,15 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 								break;
 
 							case DHTLIB_ERROR_CHECKSUM:
-								Serial.println(" CHECKSUM_ERROR");
+								Serial.println(F(" CHECKSUM_ERROR"));
 								break;
 
 							case DHTLIB_ERROR_TIMEOUT:
-								Serial.println(" TIMEOUT");
+								Serial.println(F(" TIMEOUT"));
 								break;
 
 							default:
-								Serial.println(" ERROR");
+								Serial.println(F(" ERROR"));
 								break;
 						}
 
@@ -158,7 +158,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 					
 					case TEMP_AURIOL433: 
 
-						Serial.println(" READ_ON_REQUEST_NOT_SUPPORTED");
+						Serial.println(F(" READ_ON_REQUEST_NOT_SUPPORTED"));
 						break;
 						
 					default:

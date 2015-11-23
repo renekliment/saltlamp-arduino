@@ -7,7 +7,7 @@ void saltlamp_433::loop()
 
 void saltlamp_433::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, m433);
@@ -21,7 +21,7 @@ void saltlamp_433::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 
-	} else if (ser_command == "SEND") {
+	} else if (ser_command == F("SEND")) {
 
 		if (DEVS.is_device(ser_pin, m433)) {
 
@@ -33,7 +33,7 @@ void saltlamp_433::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 			
-	} else if (ser_command == "PROTO") {
+	} else if (ser_command == F("PROTO")) {
 
 		if (DEVS.is_device(ser_pin, m433)) {
 

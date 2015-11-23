@@ -39,14 +39,14 @@ void saltlamp_DI::loop()
 void saltlamp_DI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
 
-	if (ser_command == "REG"
-		|| ser_command == "REG_PULLUP"
+	if (ser_command == F("REG")
+		|| ser_command == F("REG_PULLUP")
 	) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, mDI);
 
-			if (ser_command == "REG_PULLUP") {
+			if (ser_command == F("REG_PULLUP")) {
 				pinMode(ser_pin, INPUT_PULLUP);
 				devices[ser_pin].pullup = true;
 			} else {
@@ -65,7 +65,7 @@ void saltlamp_DI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_PIN_IN_USE;
 		}
 
-	} else if (ser_command == "ENABLE") {
+	} else if (ser_command == F("ENABLE")) {
 
 		if (DEVS.is_device(ser_pin, mDI)) {
 			devices[ser_pin].active = true;
@@ -75,7 +75,7 @@ void saltlamp_DI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 
-	} else if (ser_command == "DISABLE") {
+	} else if (ser_command == F("DISABLE")) {
 
 		if (DEVS.is_device(ser_pin, mDI)) {
 			devices[ser_pin].active = false;
@@ -85,7 +85,7 @@ void saltlamp_DI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			response_msg = MSG_NOT_DEVICE;
 		}
 
-	} else if (ser_command == "READ") {
+	} else if (ser_command == F("READ")) {
 
 		if (DEVS.is_device(ser_pin, mDI)) {
 			send_status(ser_pin);

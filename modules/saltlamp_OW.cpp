@@ -3,7 +3,7 @@
 void saltlamp_OW::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {	
 	
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 
 		if (!DEVS.in_use(ser_pin)) {
 			DEVS.reg(ser_pin, mOW);

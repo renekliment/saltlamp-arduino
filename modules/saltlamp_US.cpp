@@ -65,7 +65,7 @@ void saltlamp_US::loop()
 
 void saltlamp_US::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
-	if (ser_command == "REG") {
+	if (ser_command == F("REG")) {
 			if (!DEVS.is_interrupt(ser_value.toInt())) {
 				response_msg = MSG_NEED_INTERRUPT_PIN;
 			} else {
@@ -91,7 +91,7 @@ void saltlamp_US::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 			attachInterrupt(DEVS.get_interrupt(devices.echo_pin), saltlamp_US_interrupt1, CHANGE);
 			
-	} else if (ser_command == "READ") {
+	} else if (ser_command == F("READ")) {
 
 		if (DEVS.is_device(ser_pin, mUS)) {
 
