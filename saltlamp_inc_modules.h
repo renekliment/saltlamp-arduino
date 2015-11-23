@@ -7,7 +7,7 @@ enum {
 	mAI,
 	mOW,
 	mTEMP,
-	mIR,
+// 	mIR,
 	mUS,
 	mSYS,
 	m433
@@ -21,8 +21,9 @@ enum {
 #include "external/MemoryFree.cpp"
 #include "external/dht.cpp"
 #include "external/auriol433.cpp"
-#include "external/IRremote/IRremote.cpp"
 #include "external/rc-switch/RCSwitch.cpp"
+// #include "external/IRremote/IRremote.cpp"
+
 
 #include "modules/saltlamp_OW.cpp"
 
@@ -31,8 +32,8 @@ enum {
 #include "modules/saltlamp_DI.cpp"
 #include "modules/saltlamp_DO.cpp"
 #include "modules/saltlamp_TEMP.cpp"
-#include "modules/saltlamp_IR.cpp"
 #include "modules/saltlamp_433.cpp"
+// #include "modules/saltlamp_IR.cpp"
 #include "modules/saltlamp_US.cpp"
 
 #endif
