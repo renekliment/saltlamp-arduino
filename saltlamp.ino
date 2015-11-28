@@ -34,6 +34,7 @@ saltlamp_SYS SYS(Serial, response_msg, DEVS);
 saltlamp_AI AI(Serial, response_msg, DEVS);
 saltlamp_DI DI(Serial, response_msg, DEVS);
 saltlamp_DO DO(Serial, response_msg, DEVS);
+saltlamp_PWM PWM(Serial, response_msg, DEVS);
 saltlamp_TEMP TEMP(Serial, response_msg, DEVS);
 void saltlamp_TEMP_interrupt1() { TEMP.auriol433check(); }
 
@@ -69,6 +70,8 @@ void loop()
 			DI.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "DO") {
 			DO.parse(ser_command, ser_pin, ser_value);
+		} else if (ser_module == "PWM") {
+			PWM.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "OW") {
 			OW.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "TEMP") {

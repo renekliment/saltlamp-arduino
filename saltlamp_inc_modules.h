@@ -5,6 +5,7 @@ enum {
 	mDI = 1,
 	mDO,
 	mAI,
+	mPWM,
 	mOW,
 	mTEMP,
 // 	mIR,
@@ -31,6 +32,7 @@ enum {
 #include "modules/saltlamp_AI.cpp"
 #include "modules/saltlamp_DI.cpp"
 #include "modules/saltlamp_DO.cpp"
+#include "modules/saltlamp_PWM.cpp"
 #include "modules/saltlamp_TEMP.cpp"
 #include "modules/saltlamp_433.cpp"
 // #include "modules/saltlamp_IR.cpp"
