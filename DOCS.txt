@@ -175,6 +175,50 @@ AI_READ #N
 <- AI #N VALUE
 ###############################################################
 
+PWM (PWM output)
+===============================================================
+// registers a device
+PWM_REG #N
+
+// registers a device, that has "inverted values",
+// meaning that if you set the pin to X, it will actually be set to 255 - X,
+// this exists here to provide unified interface for further communication,
+// meaning you only need to mention the fact here and then you can work with it as with normal device
+PWM_REG #N I
+
+// set security interval for a device,
+// where VALUE is a number in miliseconds
+// meaning you can change the state of a device only once in VALUE milis,
+// (you don't have to cover this in you app (timers, etc), you can just set it here instead)
+PWM_SETSECINTERVAL #N VALUE
+
+// set device state
+// where 0 <=VALUE <= 255
+PWM_WRITE #N VALUE
+
+// requests device state
+PWM_GETSTATE #N
+
+// sends device state on request
+// where 0 <=VALUE <= 255
+<- PWM #N VALUE
+###############################################################
+
+433 (communication with devices over protocols that use 433MHz)
+===============================================================
+// registers a device
+// where PROTOCOL is int
+// for protocol number, see the rc-switch library
+433_REG #N PROTOCOL
+
+// sends out a code
+// CODE is a decimal number, representing a 24-bit long code
+433_SEND #N CODE
+
+// switches protocol to PROTOCOL
+433_PROTO #N PROTOCOL
+###############################################################
+
 OW (1-Wire)
 ===============================================================
 // registers 1-Wire bus
