@@ -20,4 +20,4 @@
 - investigate whether the String class causes any problems
 	- with memory fragmentation / usage
 	- does the .reserve() serve its purpose? do the boundaries cover all (or at least most) uses?
-- include header files instead of .cpp files when it actually works
+- put `byte response_msg = 0;` where it belongs when it actually works

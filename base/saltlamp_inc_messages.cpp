@@ -1,21 +1,4 @@
-#ifndef saltlamp_inc_messages_h
-#define saltlamp_inc_messages_h
-
-byte response_msg = 0;
-
-enum {
-	MSG_NONE = 0,
-	MSG_OK,
-	MSG_PIN_IN_USE,
-	MSG_ONE_PER_MODULE,
-	MSG_SYNTAX_ERROR,
-	MSG_CMD_ERROR,
-	MSG_CMD_NOT_RECO,
-	MSG_MODULE_NA,
-	MSG_NOT_DEVICE,
-	MSG_SECURITY_INTERVAL,
-	MSG_NEED_INTERRUPT_PIN
-} messages;
+#include "saltlamp_inc_messages.h"
 
 void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_module, String& ser_command, byte& ser_pin, String& ser_string)
 {
@@ -59,5 +42,3 @@ void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_mo
 		response_msg = 0;
 	}
 }
-
-#endif

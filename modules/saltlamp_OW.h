@@ -1,4 +1,8 @@
-#include "saltlamp_module.h"
+#ifndef saltlamp_OW_h
+#define saltlamp_OW_h
+
+#include "../base/saltlamp_module.h"
+#include <OneWire.h>
 
 class saltlamp_OW : public saltlamp_module {
 		
@@ -10,3 +14,5 @@ class saltlamp_OW : public saltlamp_module {
 		saltlamp_OW(HardwareSerial& serial_ext, byte& response_msg_ext, saltlamp_devices& DEVS_ext)
 			: saltlamp_module(serial_ext, response_msg_ext, DEVS_ext) {}
 };
+
+#endif

@@ -2,7 +2,10 @@
 #define saltlamp_module_h
 
 #include "Arduino.h"
+
 #include "saltlamp_devices.h"
+#include "saltlamp_inc_messages.h"
+#include "saltlamp_inc_modules.h"
 
 class saltlamp_module {
 	protected:

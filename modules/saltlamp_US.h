@@ -1,4 +1,7 @@
-#include "saltlamp_module.h"
+#ifndef saltlamp_US_h
+#define saltlamp_US_h
+
+#include "../base/saltlamp_module.h"
 
 class saltlamp_US : public saltlamp_module {
 	private:
@@ -34,3 +37,5 @@ class saltlamp_US : public saltlamp_module {
 
 void saltlamp_US_interrupt1();
 void saltlamp_US_interrupt2();
+
+#endif

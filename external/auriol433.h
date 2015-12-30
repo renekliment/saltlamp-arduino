@@ -19,6 +19,8 @@
 #define F_CARRY_BIT 3                                     // Bit used to carry over bit shift from one long to the other
 #define F_STATE 7                                         // 0=Sync mode, 1=Data mode
 
+#include "Arduino.h"
+
 class auriol433 {
 	private:
 		

@@ -1,5 +1,13 @@
-#include "saltlamp_module.h"
-#include "external/Arduino-Temperature-Control-Library/DallasTemperature.cpp"
+#ifndef saltlamp_TEMP_h
+#define saltlamp_TEMP_h
+
+#include "../base/saltlamp_module.h"
+
+#include "../external/Arduino-Temperature-Control-Library/DallasTemperature.h"
+#include "../external/dht.h"
+#include "../external/auriol433.h"
+
+#include "saltlamp_OW.h"
 
 class saltlamp_TEMP : public saltlamp_module {
 	private:
@@ -37,3 +45,5 @@ class saltlamp_TEMP : public saltlamp_module {
 
 void saltlamp_TEMP_interrupt1();
 void saltlamp_TEMP_interrupt2();
+
+#endif

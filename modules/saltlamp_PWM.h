@@ -1,4 +1,7 @@
-#include "saltlamp_module.h"
+#ifndef saltlamp_PWM_h
+#define saltlamp_PWM_h
+
+#include "../base/saltlamp_module.h"
 
 class saltlamp_PWM : public saltlamp_module {
 	private:
@@ -23,3 +26,5 @@ class saltlamp_PWM : public saltlamp_module {
 		saltlamp_PWM(HardwareSerial& serial_ext, byte& response_msg_ext, saltlamp_devices& DEVS_ext)
 			: saltlamp_module(serial_ext, response_msg_ext, DEVS_ext) {}
 };
+
+#endif

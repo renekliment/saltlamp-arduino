@@ -1,4 +1,8 @@
-#include "saltlamp_module.h"
+#ifndef saltlamp_SYS_h
+#define saltlamp_SYS_h
+
+#include "../base/saltlamp_module.h"
+#include "../external/MemoryFree.h"
 
 class saltlamp_SYS : public saltlamp_module {
 	private:
@@ -12,3 +16,5 @@ class saltlamp_SYS : public saltlamp_module {
 				SYS_configured = false;
 			}
 };
+
+#endif

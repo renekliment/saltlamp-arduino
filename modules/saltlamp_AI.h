@@ -1,4 +1,7 @@
-#include "saltlamp_module.h"
+#ifndef saltlamp_AI_h
+#define saltlamp_AI_h
+
+#include "../base/saltlamp_module.h"
 
 class saltlamp_AI : public saltlamp_module {
 	private:
@@ -20,3 +23,5 @@ class saltlamp_AI : public saltlamp_module {
 		saltlamp_AI(HardwareSerial& serial_ext, byte& response_msg_ext, saltlamp_devices& DEVS_ext)
 			: saltlamp_module(serial_ext, response_msg_ext, DEVS_ext) {}
 };
+
+#endif

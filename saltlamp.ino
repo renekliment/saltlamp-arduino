@@ -1,10 +1,27 @@
 #include "Arduino.h"
 #include <OneWire.h>
 
-#include "saltlamp_inc_boards.h"
-#include "saltlamp_inc_messages.h"
-#include "saltlamp_devices.h"
-#include "saltlamp_inc_modules.h"
+#include "base/saltlamp_inc_boards.h"
+
+// because this here makes total sense - FUCK YOU, Arduino IDE!
+// it doesn't work when moved to base/saltlamp_inc_messages
+byte response_msg = 0;
+
+#include "base/saltlamp_inc_messages.h"
+#include "base/saltlamp_devices.h"
+
+#include "base/saltlamp_inc_modules.h"
+
+#include "modules/saltlamp_OW.h"
+#include "modules/saltlamp_SYS.h"
+#include "modules/saltlamp_AI.h"
+#include "modules/saltlamp_DI.h"
+#include "modules/saltlamp_DO.h"
+#include "modules/saltlamp_PWM.h"
+#include "modules/saltlamp_TEMP.h"
+#include "modules/saltlamp_433.h"
+// #include "modules/saltlamp_IR.h"
+#include "modules/saltlamp_US.h"
 
 // Variables for parsing PC commands
 String ser_string = "";
