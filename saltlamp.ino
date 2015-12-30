@@ -20,7 +20,7 @@ byte response_msg = 0;
 #include "modules/saltlamp_PWM.h"
 #include "modules/saltlamp_TEMP.h"
 #include "modules/saltlamp_433.h"
-// #include "modules/saltlamp_IR.h"
+#include "modules/saltlamp_IR.h"
 #include "modules/saltlamp_US.h"
 
 // Variables for parsing PC commands

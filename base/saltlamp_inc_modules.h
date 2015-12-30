@@ -8,7 +8,7 @@ enum {
 	mPWM,
 	mOW,
 	mTEMP,
-// 	mIR,
+	mIR,
 	mUS,
 	mSYS,
 	m433
