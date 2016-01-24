@@ -31,7 +31,7 @@ bool saltlamp_devices::is_device(byte pin, byte module)
 
 bool saltlamp_devices::is_interrupt(byte pin)
 {
-	for (byte i=0; i < (sizeof(BOARD_interrupts)/sizeof(byte)); i++) {
+	for (byte i=0; i < BOARD_interrupts_COUNT; i++) {
 		if (BOARD_interrupts[i] == pin) {
 			return true;
 		}
@@ -42,7 +42,7 @@ bool saltlamp_devices::is_interrupt(byte pin)
 
 byte saltlamp_devices::get_interrupt(byte pin)
 {
-	for (byte i=0; i < (sizeof(BOARD_interrupts)/sizeof(byte)); i++) {
+	for (byte i=0; i < BOARD_interrupts_COUNT; i++) {
 		if (BOARD_interrupts[i] == pin) {
 			return i;
 		}
