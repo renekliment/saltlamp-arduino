@@ -27,7 +27,7 @@ void saltlamp_IR::loop()
 			}
 
 			if (devices->keyCurrent != 0xFFFFFFFF) {
-				Serial.print("IR ");
+				Serial.print(F("IR "));
 				Serial.print(devices->pin);
 				Serial.print(" ");
 				Serial.println(devices->keyCurrent, HEX);

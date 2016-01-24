@@ -22,7 +22,7 @@ void saltlamp_SYS::parse(String &ser_command, byte &ser_pin, String &ser_value)
 	} else if (ser_command == F("MEM")) {
 
 		if (ser_pin == 99) {
-			Serial.print("SYS_MEM ");
+			Serial.print(F("SYS_MEM "));
 			Serial.println(freeMemory());
 		} else {
 			response_msg = MSG_SYNTAX_ERROR;

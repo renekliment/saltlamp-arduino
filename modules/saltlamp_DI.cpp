@@ -2,7 +2,7 @@
 
 void saltlamp_DI::send_status(byte pin)
 {
-	Serial.print("DI ");
+	Serial.print(F("DI "));
 	Serial.print(pin);
 	Serial.print(" ");
 

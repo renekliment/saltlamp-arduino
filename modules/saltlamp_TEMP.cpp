@@ -108,7 +108,7 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 				response_msg = MSG_SECURITY_INTERVAL;
 			} else {
 
-				Serial.print("TEMP ");
+				Serial.print(F("TEMP "));
 				Serial.print(ser_pin);
 				
 				devices[ser_pin].last_read = currentMillis;

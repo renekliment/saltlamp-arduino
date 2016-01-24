@@ -60,7 +60,7 @@ void saltlamp_PWM::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 		if (DEVS.is_device(ser_pin, mPWM)) {
 			
-			Serial.print("PWM ");
+			Serial.print(F("PWM "));
 			Serial.print(ser_pin);
 			Serial.print(" ");
 			Serial.println( devices[ser_pin].inverted ? 255 -  devices[ser_pin].state : devices[ser_pin].state );

@@ -95,7 +95,7 @@ void saltlamp_US::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 		if (DEVS.is_device(ser_pin, mUS)) {
 
-			Serial.print("US ");
+			Serial.print(F("US "));
 			Serial.print(ser_pin);
 			Serial.print(" ");
 			Serial.println(range);
