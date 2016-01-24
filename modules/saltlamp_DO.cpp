@@ -8,7 +8,7 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			DEVS.reg(ser_pin, mDO);
 			
 			devices[ser_pin].inverted  = false;
-			if (ser_value == "I") {
+			if (ser_value == F("I")) {
 				devices[ser_pin].inverted = true;
 			}
 
@@ -36,7 +36,7 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 				
 				devices[ser_pin].last_read = currentMillis;
 				
-				if (ser_value == "1" || ser_value == "0") {
+				if (ser_value == F("1") || ser_value == F("0")) {
 					/*
 								SENDING		INVERTED
 								0			0 		=> OFF
@@ -69,9 +69,9 @@ void saltlamp_DO::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 		if (DEVS.is_device(ser_pin, mDO)) {
 			
-			Serial.print("DO ");
+			Serial.print(F("DO "));
 			Serial.print(ser_pin);
-			Serial.print(" ");
+			Serial.print(F(" "));
 			Serial.println( !(devices[ser_pin].state == devices[ser_pin].inverted ) );
 
 		} else {

@@ -8,7 +8,7 @@ void saltlamp_AI::send_status(byte pin)
 
 	Serial.print(F("AI "));
 	Serial.print(pin + 60);
-	Serial.print(" ");
+	Serial.print(F(" "));
 	Serial.println(devices[pin].value);
 }
 
@@ -41,7 +41,7 @@ void saltlamp_AI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			devices[ser_pin].value = analogRead(ser_pin);
 
 			devices[ser_pin].active = false;
-			if (ser_value == "E") {
+			if (ser_value == F("E")) {
 				devices[ser_pin].active = true;
 			}
 

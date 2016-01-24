@@ -10,7 +10,7 @@ void saltlamp_PWM::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			DEVS.reg(ser_pin, mPWM);
 			
 			devices[ser_pin].inverted  = false;
-			if (ser_value == "I") {
+			if (ser_value == F("I")) {
 				devices[ser_pin].inverted = true;
 			}
 
@@ -62,7 +62,7 @@ void saltlamp_PWM::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			
 			Serial.print(F("PWM "));
 			Serial.print(ser_pin);
-			Serial.print(" ");
+			Serial.print(F(" "));
 			Serial.println( devices[ser_pin].inverted ? 255 -  devices[ser_pin].state : devices[ser_pin].state );
 
 		} else {

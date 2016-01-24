@@ -5,7 +5,7 @@ void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_mo
 	if (response_msg > 0) {
 		switch (response_msg) {
 			case MSG_OK:
-				Serial.print("OK ");
+				Serial.print(F("OK "));
 				Serial.println(ser_string);
 				break;
 			case MSG_PIN_IN_USE:

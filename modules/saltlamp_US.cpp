@@ -48,9 +48,9 @@ void saltlamp_US::loop()
 				handWentAway = false;
 				handAwayTime = millis();
 
-				Serial.print("US ");
+				Serial.print(F("US "));
 				Serial.print(devices.transciever_pin);
-				Serial.println(" WAVE");
+				Serial.println(F(" WAVE"));
 			}
 
 			if ((millis() - handAwayTime) > 1000) {
@@ -97,7 +97,7 @@ void saltlamp_US::parse(String &ser_command, byte &ser_pin, String &ser_value)
 
 			Serial.print(F("US "));
 			Serial.print(ser_pin);
-			Serial.print(" ");
+			Serial.print(F(" "));
 			Serial.println(range);
 
 		} else {

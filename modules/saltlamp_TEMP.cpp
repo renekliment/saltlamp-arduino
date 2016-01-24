@@ -22,9 +22,9 @@ void saltlamp_TEMP::loop()
 				
 					Serial.print(F("TEMP "));
 					Serial.print(i);
-					Serial.print(" ");
+					Serial.print(F(" "));
 					Serial.print(ret.temperature, 1);
-					Serial.print(" ");
+					Serial.print(F(" "));
 					Serial.println(ret.humidity);
 				}	
 			}
@@ -119,9 +119,9 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 						int chk = DHT.read11(ser_pin);
 						switch (chk) {
 							case DHTLIB_OK:
-								Serial.print(" ");
+								Serial.print(F(" "));
 								Serial.print((float)DHT.temperature, 2);
-								Serial.print(" ");
+								Serial.print(F(" "));
 								Serial.print((float)DHT.humidity, 2);
 								Serial.println();
 								break;
@@ -145,12 +145,12 @@ void saltlamp_TEMP::parse(String &ser_command, byte &ser_pin, String &ser_value)
 					case TEMP_DALLAS:
 					
 						dallas->requestTemperatures();
-						Serial.print(" ");
+						Serial.print(F(" "));
 						Serial.print(dallas->getTempC(devices[ser_pin].owaddr));
-						Serial.print(" ");
+						Serial.print(F(" "));
 						for (uint8_t i = 0; i < 8; i++) {
 							// zero pad the address if necessary
-							if (devices[ser_pin].owaddr[i] < 16) Serial.print("0");
+							if (devices[ser_pin].owaddr[i] < 16) Serial.print(F("0"));
 							Serial.print(devices[ser_pin].owaddr[i], HEX);
 						}
 						Serial.println();

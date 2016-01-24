@@ -4,7 +4,7 @@ void saltlamp_DI::send_status(byte pin)
 {
 	Serial.print(F("DI "));
 	Serial.print(pin);
-	Serial.print(" ");
+	Serial.print(F(" "));
 
 	if (!devices[pin].active) {
 		devices[pin].state = digitalRead(pin);
@@ -56,7 +56,7 @@ void saltlamp_DI::parse(String &ser_command, byte &ser_pin, String &ser_value)
 			devices[ser_pin].state = digitalRead(ser_pin);
 
 			devices[ser_pin].active = true;
-			if (ser_value == "D") {
+			if (ser_value == F("D")) {
 				devices[ser_pin].active = false;
 			}
 
