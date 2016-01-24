@@ -159,7 +159,7 @@ AI_REG #N E
 //
 // VALUE is a number between 1 and like 1023
 // for sensors like photoresistors, 10 or 15 seems like a value you would probably use
-AU_SET_DIFFTHRSHLD #N VALUE
+AI_SET_DIFFTHRSHLD #N VALUE
 
 // enables sending messages on device state change (on-the-fly setting)
 AI_ENABLE #N
