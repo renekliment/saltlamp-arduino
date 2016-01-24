@@ -80,6 +80,8 @@ Message						Meaning
 
 "ERROR NEED_INTERRUPT_PIN"	You are probably trying to register a device on a pin that does not have an interrupt, 
 							but the device needs it (for example an ultrasonic sensor or a wireless receiver).
+							
+"ERROR NEED_PWM_PIN"		You are probably trying to register a device on a pin that does not have PWM.
 
 DI (digital input)
 ===============================================================

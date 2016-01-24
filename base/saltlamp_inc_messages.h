@@ -14,7 +14,8 @@ enum {
 	MSG_MODULE_NA,
 	MSG_NOT_DEVICE,
 	MSG_SECURITY_INTERVAL,
-	MSG_NEED_INTERRUPT_PIN
+	MSG_NEED_INTERRUPT_PIN,
+	MSG_NEED_PWM_PIN
 } messages;
 
 void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_module, String& ser_command, byte& ser_pin, String& ser_string);

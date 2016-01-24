@@ -17,8 +17,7 @@ class saltlamp_PWM : public saltlamp_module {
 		
 		unsigned long currentMillis;
 
-		static const byte PINS = BOARD_D_MAX + 1;
-		device devices[PINS];
+		device devices[BOARD_pwms_COUNT];
 
 	public:
 		void loop() {}

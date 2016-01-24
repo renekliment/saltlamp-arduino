@@ -35,6 +35,9 @@ void saltlamp_message(HardwareSerial& Serial, byte& response_msg, String& ser_mo
 			case MSG_NEED_INTERRUPT_PIN:
 				Serial.println(F("ERROR NEED_INTERRUPT_PIN"));
 				break;
+			case MSG_NEED_PWM_PIN:
+				Serial.println(F("ERROR NEED_PWM_PIN"));
+				break;
 			default:
 				break;
 		}

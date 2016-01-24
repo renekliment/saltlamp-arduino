@@ -50,3 +50,23 @@ byte saltlamp_devices::get_interrupt(byte pin)
 
 	return -1;
 }
+
+bool saltlamp_devices::is_pwm(byte pin)
+{
+	for (byte i=0; i < BOARD_pwms_COUNT; i++) {
+		if (BOARD_pwms[i] == pin) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool saltlamp_devices::get_pwm_index(byte pin)
+{
+	for (byte i=0; i < BOARD_pwms_COUNT; i++) {
+		if (BOARD_pwms[i] == pin) {
+			return i;
+		}
+	}
+}
