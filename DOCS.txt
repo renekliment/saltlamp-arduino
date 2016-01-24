@@ -208,10 +208,10 @@ PWM_GETSTATE #N
 
 433 (communication with devices over protocols that use 433MHz)
 ===============================================================
-// registers a device
+// registers a transmitter device
 // where PROTOCOL is int
 // for protocol number, see the rc-switch library
-433_REG #N PROTOCOL
+433_REG_TRANSMITTER #N PROTOCOL
 
 // sends out a code
 // CODE is a decimal number, representing a 24-bit long code
@@ -219,6 +219,13 @@ PWM_GETSTATE #N
 
 // switches protocol to PROTOCOL
 433_PROTO #N PROTOCOL
+
+// registers a receiver device
+// the #N has to be a pin with an interrupt
+433_REG_RECEIVER #N
+
+// decoded key code by the receiver
+<- 433 #N CODE
 ###############################################################
 
 OW (1-Wire)

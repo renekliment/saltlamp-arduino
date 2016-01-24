@@ -2,8 +2,9 @@
 #define saltlamp_inc_boards_h
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	//								  0  1   2   3   4   5
-	const byte BOARD_interrupts[6] = {2, 3, 21, 20, 19, 18};
+	const byte BOARD_interrupts_COUNT = 6;
+	//                                                     0  1   2   3   4   5
+	const byte BOARD_interrupts[BOARD_interrupts_COUNT] = {2, 3, 21, 20, 19, 18};
 
 	const byte BOARD_serials[] = {0, 1, 19, 18, 17, 16, 15, 14};
 
@@ -16,8 +17,9 @@
 	const byte BOARD_A_MAX = 15;
 
 #else
-	//								  0  1
-	const byte BOARD_interrupts[2] = {2, 3};
+	const byte BOARD_interrupts_COUNT = 2;
+	//                                                     0  1
+	const byte BOARD_interrupts[BOARD_interrupts_COUNT] = {2, 3};
 
 	const byte BOARD_serials[] = {0, 1};
 

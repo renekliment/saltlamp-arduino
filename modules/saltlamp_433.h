@@ -6,12 +6,21 @@
 
 class saltlamp_433 : public saltlamp_module {
 	private:
-		struct device {
+		struct deviceT {
 			RCSwitch radio;
+		};
+		
+		struct deviceR {
+			RCSwitch radio;
+			bool registered;
+			
+			deviceR() : registered(false) {}
 		};
 
 		static const byte PINS = BOARD_D_MAX + 1;
-		device devices[PINS];
+		deviceT devicesT[PINS];
+		
+		deviceR devicesR[BOARD_interrupts_COUNT];
 
 	public:
 		void loop();

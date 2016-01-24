@@ -68,6 +68,7 @@ void loop()
 	US.loop();
 	TEMP.loop();
 // 	IR.loop();
+	ftt433.loop();
 
 	if (ser_string_complete) {
 		ser_module = ser_string.substring(0, ser_string.indexOf('_'));
