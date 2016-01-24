@@ -20,8 +20,8 @@ byte response_msg = 0;
 #include "modules/saltlamp_PWM.h"
 #include "modules/saltlamp_TEMP.h"
 #include "modules/saltlamp_433.h"
-#include "modules/saltlamp_IR.h"
-#include "modules/saltlamp_US.h"
+// #include "modules/saltlamp_IR.h"
+// #include "modules/saltlamp_US.h"
 
 // Variables for parsing PC commands
 String ser_string = "";
@@ -58,14 +58,14 @@ void saltlamp_TEMP_interrupt1() { TEMP.auriol433check(); }
 saltlamp_433 ftt433(Serial, response_msg, DEVS);
 // saltlamp_IR IR(Serial, response_msg, DEVS);
 
-saltlamp_US US(Serial, response_msg, DEVS);
-void saltlamp_US_interrupt1() { US.measure(); }
+// saltlamp_US US(Serial, response_msg, DEVS);
+// void saltlamp_US_interrupt1() { US.measure(); }
 
 void loop()
 {
 	DI.loop();
 	AI.loop();
-	US.loop();
+// 	US.loop();
 	TEMP.loop();
 // 	IR.loop();
 	ftt433.loop();
@@ -94,8 +94,8 @@ void loop()
 			OW.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "TEMP") {
 			TEMP.parse(ser_command, ser_pin, ser_value);
-		} else if (ser_module == "US") {
-			US.parse(ser_command, ser_pin, ser_value);
+// 		} else if (ser_module == "US") {
+// 			US.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "SYS") {
 			SYS.parse(ser_command, ser_pin, ser_value);
 		} else if (ser_module == "433") {
