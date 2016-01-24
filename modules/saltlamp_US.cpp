@@ -66,30 +66,32 @@ void saltlamp_US::loop()
 void saltlamp_US::parse(String &ser_command, byte &ser_pin, String &ser_value)
 {
 	if (ser_command == F("REG")) {
+		
 			if (!DEVS.is_interrupt(ser_value.toInt())) {
 				response_msg = MSG_NEED_INTERRUPT_PIN;
-			} else {
-				if (!DEVS.in_use(ser_pin)) {
-					if (!DEVS.in_use(ser_value.toInt())) {
-						devices.transciever_pin = ser_pin;
-						devices.echo_pin = ser_value.toInt();
+				return;
+			} 
+			
+			if (!DEVS.in_use(ser_pin)) {
+				if (!DEVS.in_use(ser_value.toInt())) {
+					devices.transciever_pin = ser_pin;
+					devices.echo_pin = ser_value.toInt();
 
-						DEVS.reg(devices.transciever_pin, mUS);
-						DEVS.reg(devices.echo_pin, mUS);
+					DEVS.reg(devices.transciever_pin, mUS);
+					DEVS.reg(devices.echo_pin, mUS);
 
-						pinMode(devices.transciever_pin, OUTPUT);
-						pinMode(devices.echo_pin, INPUT);
+					pinMode(devices.transciever_pin, OUTPUT);
+					pinMode(devices.echo_pin, INPUT);
 
-						response_msg = MSG_OK;
-					} else {
-						response_msg = MSG_PIN_IN_USE;
-					}
+					attachInterrupt(DEVS.get_interrupt(devices.echo_pin), saltlamp_US_interrupt1, CHANGE);
+					
+					response_msg = MSG_OK;
 				} else {
 					response_msg = MSG_PIN_IN_USE;
 				}
+			} else {
+				response_msg = MSG_PIN_IN_USE;
 			}
-
-			attachInterrupt(DEVS.get_interrupt(devices.echo_pin), saltlamp_US_interrupt1, CHANGE);
 			
 	} else if (ser_command == F("READ")) {
 
