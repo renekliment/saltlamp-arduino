@@ -5,6 +5,7 @@ This is a piece of software that is somewhat similar to MySensors. However, it d
 You can use the code from the `saltlamp-arduino-mqtt` repo in order to connect your sensors to an MQTT network.
 
 The idea behind all this is that you:
+
 1. take an Arduino
 2. upload this firmware as it is
 3. hook up your sensors
