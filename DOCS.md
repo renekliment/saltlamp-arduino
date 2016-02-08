@@ -1,4 +1,4 @@
-# Legend:
+# Legend
 
 |	|                                                        |
 |-------|--------------------------------------------------------|
@@ -45,7 +45,7 @@ MEGA	| UNO     | DESCRIPTION
 80 - 89	| 80 - 89 | PING - PONG
 90 - 99	| 90 - 99 | SYSTEM PINs
 
-# Return / error states:
+# Return / error states
 With every command you get a state back. You should check for this.
 
 If your command CMD was completed successfully, you get an "OK CMD" message back.
