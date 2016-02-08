@@ -20,7 +20,7 @@ class saltlamp_devices {
 		bool is_interrupt(byte pin);
 		byte get_interrupt(byte pin);
 		bool is_pwm(byte pin);
-		bool get_pwm_index(byte pin);
+		byte get_pwm_index(byte pin);
 };
 
 #endif
