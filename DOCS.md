@@ -1,17 +1,18 @@
-Legend:
----------------------------------------------------------------
-#N		device pin number
-<-		prefixes lines that the Arduino itself sends to the PC
+# Legend:
 
-Syntax
----------------------------------------------------------------
+|	|                                                        |
+|-------|--------------------------------------------------------|
+| \#N	| device pin number                                      |
+| <-	| prefixes lines that the Arduino itself sends to the PC |
+
+# Syntax
 The general syntax is:
 
-moduleName_command pinNumber optionalParameterForSomeCommands
+`moduleName_command pinNumber optionalParameterForSomeCommands`
 
 so for example: 
 
-DO_WRITE 13 1
+`DO_WRITE 13 1`
 
 means:
 
@@ -23,68 +24,58 @@ value:		1
 as mentioned, the parameter (also called a value) is optional for some commands,
 for example, this command does not require it:
 
-DI_REG 12
+`DI_REG 12`
+
 (registers an DI device on pin 12)
 
 however you could pass it a parameter "D" like this:
 
-DI_REG 12 D
+`DI_REG 12 D`
+
 (you can check the module documentation for what this means)
 
-Pin mapping (virtual pins <--> real pins)
-----------------------------------------------
-MEGA		UNO			DESCRIPTION
-----------------------------------------------
-00 - 53		00 - 13		DIGITAL
-54 - 59		14 - 59		---
-60 - 75		60 - 65		ANALOG
-76 - 79		66 - 79		---
-80 - 89		80 - 89		PING - PONG
+# Pin mapping (virtual pins <--> real pins)
 
-90 - 99		90 - 99		SYSTEM PINs
+MEGA	| UNO     | DESCRIPTION
+--------|---------|-------------
+00 - 53 | 00 - 13 | DIGITAL
+54 - 59 | 14 - 59 | ---
+60 - 75	| 60 - 65 | ANALOG
+76 - 79	| 66 - 79 | ---
+80 - 89	| 80 - 89 | PING - PONG
+90 - 99	| 90 - 99 | SYSTEM PINs
 
-Return / error states:
----------------------------------------------------------------
+# Return / error states:
 With every command you get a state back. You should check for this.
 
 If your command CMD was completed successfully, you get an "OK CMD" message back.
 Example:
-
+```
 -> DO_REG 13
 <- OK DO_REG 13
 -> DO_WRITE 13 1
 <- OK DO_WRITE 13 1
-
+```
 If there is an error, you get a message prefixed with "ERROR ".
 Common error messages are these:
 
-Message						Meaning
--------------------------------------
-"ERROR PIN_IN_USE"			The pin is in use already.
+Message				| Meaning
+--------------------------------|---------
+"ERROR PIN_IN_USE"		| The pin is in use already.
+"ERROR ONE_PER_MODULE"		| This module can handle one device only.
+"ERROR SYNTAX_ERROR"		| Syntax error.
+"ERROR CMD_ERROR"		| Command error. Maybe you are doing something wrong? Check your command.
+"ERROR CMD_NOT_RECO"		| Command not recognized. For example you are sending "DO_RED 13" instead of "DO_REG 13"
+"ERROR MODULE_NA"		| Requested module not available.
+"ERROR NOT_DEVICE"		| Device does not exist or is not of the kind you think it is. For example you are trying to do a "DO_WRITE" on an AI device
+"ERROR SECURITY_INTERVAL"	| You are trying to read or write (to) the device before the security interval has passed.
+"ERROR NEED_INTERRUPT_PIN"	| You are probably trying to register a device on a pin that does not have an interrupt, but the device needs it (for example an ultrasonic sensor or a wireless receiver).
+"ERROR NEED_PWM_PIN"		| You are probably trying to register a device on a pin that does not have PWM.
 
-"ERROR ONE_PER_MODULE"		This module can handle one device only.
+# Modules
 
-"ERROR SYNTAX_ERROR"		Syntax error.
-
-"ERROR CMD_ERROR"			Command error. Maybe you are doing something wrong? Check your command.
-
-"ERROR CMD_NOT_RECO"		Command not recognized. 
-							for example you are sending "DO_RED 13" instead of "DO_REG 13"
-							
-"ERROR MODULE_NA"			Requested module not available.
-
-"ERROR NOT_DEVICE"			Device does not exist or is not of the kind you think it is.
-							for example you are trying to do a "DO_WRITE" on an AI device
-
-"ERROR SECURITY_INTERVAL"	You are trying to read or write (to) the device before the security interval has passed.
-
-"ERROR NEED_INTERRUPT_PIN"	You are probably trying to register a device on a pin that does not have an interrupt, 
-							but the device needs it (for example an ultrasonic sensor or a wireless receiver).
-							
-"ERROR NEED_PWM_PIN"		You are probably trying to register a device on a pin that does not have PWM.
-
-DI (digital input)
-===============================================================
+## DI (digital input)
+```
 // registers a device, 
 // automatically enables sending messages on device state change
 DI_REG #N 
@@ -113,10 +104,10 @@ DI_READ #N
 // current device state (sent on request or automatically depending on the setting)
 // VALUE is either 1 or 0
 <- DI #N VALUE
-###############################################################
+```
 	
-DO (digital output)
-===============================================================
+## DO (digital output)
+```
 // registers a device
 DO_REG #N
 
@@ -143,10 +134,10 @@ DO_GETSTATE #N
 // sends device state on request
 // VALUE can be either 0 (turned off), or 1 (turned on)
 <- DO #N VALUE
-###############################################################
+```
 
-AI (analog input)
-===============================================================
+## AI (analog input)
+```
 // registers a device, 
 // automatically disables sending messages on device state change
 AI_REG #N
@@ -175,10 +166,10 @@ AI_READ #N
 // current device state (sent on request or automatically depending on the setting)
 // VALUE is from 0 to 1023
 <- AI #N VALUE
-###############################################################
+```
 
-PWM (PWM output)
-===============================================================
+## PWM (PWM output)
+```
 // registers a device
 PWM_REG #N
 
@@ -204,10 +195,10 @@ PWM_GETSTATE #N
 // sends device state on request
 // where 0 <=VALUE <= 255
 <- PWM #N VALUE
-###############################################################
+```
 
-433 (communication with devices over protocols that use 433MHz)
-===============================================================
+## 433 (communication with devices over protocols that use 433MHz)
+```
 // registers a transmitter device
 // where PROTOCOL is int
 // for protocol number, see the rc-switch library
@@ -226,16 +217,16 @@ PWM_GETSTATE #N
 
 // decoded key code by the receiver
 <- 433 #N CODE
-###############################################################
+```
 
-OW (1-Wire)
-===============================================================
+## OW (1-Wire)
+```
 // registers 1-Wire bus
 OW_REG #N
-###############################################################
+```
 
-TEMP (temperature and humidity readings)
-===============================================================
+## TEMP (temperature and humidity readings)
+```
 // registers a DHT11 device
 TEMP_REG_DHT11 #N
 
@@ -253,19 +244,19 @@ TEMP_READ #N
 // VALUE1 is usually a float meaning temperature
 // VALUE2 is usually a float meaning humidity or it can be sensor ID
 <- TEMP #N VALUE1 VALUE2
-###############################################################
+```
 
-IR (infrared signals)
-===============================================================
+## IR (infrared signals)
+```
 // registers a device
 IR_REG #N
 
 // a message with an IR code
 <- IR #N VALUE
-###############################################################
+```
 
-SYS (system module)
-===============================================================
+## SYS (system module)
+```
 // should return some diagnostics ... not implemented yet
 SYS_DIAG 99
 
@@ -293,10 +284,10 @@ SYS_CONFIG 99
 // useful when you restart your control app and wanna figure out, 
 //     if you need to configure the Arduino or not
 SYS_CONFIG 99 1
-###############################################################
+```
 
-US (ultrasonic measurements)
-===============================================================
+## US (ultrasonic measurements)
+```
 // registers a device 
 // the #PIN_ECHO needs to be a pin with an interrupt
 US_REG #PIN_SEND #PIN_ECHO
@@ -311,5 +302,4 @@ US_READ #N
 // sends a the result of the measurement
 // VALUE is in centimeters
 <- US #N VALUE
-###############################################################
-###############################################################
+```
